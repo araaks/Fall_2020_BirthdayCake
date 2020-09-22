@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         SeekBar numCandlesSeek = (SeekBar) findViewById(R.id.seekBar);
         numCandlesSeek.setOnSeekBarChangeListener(newCakeController);
+
+        newCakeView.setOnTouchListener(newCakeController);
 
     }
 

@@ -1,13 +1,14 @@
 package cs301.birthdaycake;
 
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
 public class CakeController implements View.OnClickListener, CompoundButton.OnCheckedChangeListener,
-                                        SeekBar.OnSeekBarChangeListener{
+                                        SeekBar.OnSeekBarChangeListener, View.OnTouchListener{
 
     private CakeView cakeView;
     private CakeModel cakeModel;
@@ -44,5 +45,20 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         // Don't care about this method
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+        //get coords of tap
+        float x = event.getX();
+        float y = event.getY();
+        Log.d("tap", "tap registered at: (" + x + ", " + y + ")");
+
+        //draw checkerboard at coords
+        this.cakeModel.xCoord = x;
+        this.cakeModel.yCoord = y;
+        this.cakeModel.drawCheck = true;
+        cakeView.invalidate();
+        return false;
     }
 }

@@ -17,6 +17,10 @@ public class CakeView extends SurfaceView {
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
 
+    //new paints for checkerboard
+    Paint checkPaint1 = new Paint();
+    Paint checkPaint2 = new Paint();
+
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
         and adapting to different tablets' screen sizes and resolutions.  I've deliberately
@@ -60,6 +64,11 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+
+        //new paints for checkerboard
+        checkPaint1.setColor(Color.BLUE);
+        checkPaint2.setColor(Color.RED);
+
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -140,7 +149,31 @@ public class CakeView extends SurfaceView {
             drawCandle(canvas, cakeLeft + cakeWidth / 2 - candleWidth * this.cake_model.numCandles + 100 * i, cakeTop);
         }
 
+        if(this.cake_model.drawCheck == true){
+            drawCheckerBoard(canvas, this.cake_model.xCoord, this.cake_model.yCoord);
+        }
+
     }//onDraw
+
+    /**
+     * method to draw a checkerboard at the selected point on the screen
+     * @param canvas
+     * @param x
+     * @param y
+     */
+    public void drawCheckerBoard(Canvas canvas, float x, float y){
+        //upper left rect
+        canvas.drawRect(x - 100, y - 100, x, y, checkPaint1);
+
+        //upper right rect
+        canvas.drawRect(x + 100, y - 100, x, y, checkPaint2);
+
+        //lower left rect
+        canvas.drawRect(x - 100, y + 100, x, y, checkPaint2);
+
+        //lower right rect
+        canvas.drawRect(x + 100, y + 100, x, y, checkPaint1);
+    }
 
 }//class CakeView
 
