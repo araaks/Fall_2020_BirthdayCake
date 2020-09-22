@@ -16,6 +16,8 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint balloonPaint = new Paint();
+    Paint stringPaint = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -33,6 +35,10 @@ public class CakeView extends SurfaceView {
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
+    public static final float balloonHeight = 100.0f;
+    public static final float balloonWidth = 75.0f;
+    public static float balloonLeft = 0.0f;
+    public static float balloonTop = 0.0f;
 
     private CakeModel cake_model;
 
@@ -60,6 +66,11 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        balloonPaint.setColor(Color.BLUE);
+        balloonPaint.setStyle(Paint.Style.FILL);
+        stringPaint.setColor(Color.BLACK);
+        stringPaint.setStrokeWidth(5.0f);
+
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -102,6 +113,11 @@ public class CakeView extends SurfaceView {
         }
     }
 
+    public void drawBalloon(Canvas canvas) {
+        canvas.drawOval(balloonLeft - (balloonWidth / 2), balloonTop - (balloonHeight / 2), balloonLeft + balloonWidth, balloonTop + balloonHeight, balloonPaint);
+        canvas.drawLine(balloonLeft + (balloonWidth / 3) - 5.0f, balloonTop + balloonHeight, balloonLeft + (balloonWidth / 3) - 5.0f, balloonTop + balloonHeight + 100, stringPaint);
+    }
+
     /**
      * onDraw is like "paint" in a regular Java program.  While a Canvas is
      * conceptually similar to a Graphics in javax.swing, the implementation has
@@ -134,10 +150,15 @@ public class CakeView extends SurfaceView {
         //Then a second cake layer
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, cakePaint);
 
-        //Draws the appropriate amount of candles that is set by the seekBar
-        //next, we used a switch case to
+        // Draws the appropriate amount of candles that is set by the seekBar
+        // next, we used a switch case to
         for(int i = 0; i < this.cake_model.numCandles; i++) {
             drawCandle(canvas, cakeLeft + cakeWidth / 2 - candleWidth * this.cake_model.numCandles + 100 * i, cakeTop);
+        }
+
+        // Draws the balloon in the touch location every time
+        if (balloonLeft != 0.0f && balloonTop != 0.0f) {
+            drawBalloon(canvas);
         }
 
     }//onDraw

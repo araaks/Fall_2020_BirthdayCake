@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -21,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         CakeView newCakeView = (CakeView) findViewById(R.id.cakeview);
 
         CakeController newCakeController = new CakeController(newCakeView);
+
+        // Set the On Touch Listener
+        newCakeView.setOnTouchListener(newCakeController);
 
         Button blowOut = (Button) findViewById(R.id.blowOutButton);
         blowOut.setOnClickListener(newCakeController);
