@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         SeekBar numCandlesSeek = (SeekBar) findViewById(R.id.seekBar);
         numCandlesSeek.setOnSeekBarChangeListener(newCakeController);
+
+        //implementing the onTouch command
+        newCakeView.setOnTouchListener(newCakeController);
 
     }
 

@@ -55,4 +55,15 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
         cakeView.invalidate();
         return false;
     }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        //set cakeModel's x and y coord to corresponding touch
+        cakeModel.xCoord = (int) event.getX();
+        cakeModel.yCoord = (int) event.getY();
+        cakeView.invalidate();
+        Log.i("touched","yes");
+        return true;
+    }
+
 }

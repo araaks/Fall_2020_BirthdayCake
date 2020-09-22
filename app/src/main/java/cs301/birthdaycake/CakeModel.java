@@ -6,5 +6,7 @@ public class CakeModel {
     public int numCandles = 2;
     public boolean isCakeFrosted = true;
     public boolean hasCandles = true;
+    public int xCoord = 0;
+    public int yCoord = 0;
 
 }
