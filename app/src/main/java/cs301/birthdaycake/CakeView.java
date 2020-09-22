@@ -16,6 +16,9 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint balloonPaint = new Paint();
+    Paint stringPaint = new Paint();
+    Paint textPaint = new Paint();
 
     //new paints for checkerboard
     Paint checkPaint1 = new Paint();
@@ -37,6 +40,10 @@ public class CakeView extends SurfaceView {
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
+    public static final float balloonHeight = 100.0f;
+    public static final float balloonWidth = 75.0f;
+    public static float balloonLeft = 0.0f;
+    public static float balloonTop = 0.0f;
 
     private CakeModel cake_model;
 
@@ -64,6 +71,13 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        balloonPaint.setColor(Color.BLUE);
+        balloonPaint.setStyle(Paint.Style.FILL);
+        stringPaint.setColor(Color.BLACK);
+        stringPaint.setStrokeWidth(5.0f);
+
+        textPaint.setColor(Color.RED);
+        textPaint.setTextSize(50f);
 
         //new paints for checkerboard
         checkPaint1.setColor(Color.BLUE);
@@ -111,6 +125,11 @@ public class CakeView extends SurfaceView {
         }
     }
 
+    public void drawBalloon(Canvas canvas) {
+        canvas.drawOval(balloonLeft - (balloonWidth / 2), balloonTop - (balloonHeight / 2), balloonLeft + balloonWidth, balloonTop + balloonHeight, balloonPaint);
+        canvas.drawLine(balloonLeft + (balloonWidth / 3) - 5.0f, balloonTop + balloonHeight, balloonLeft + (balloonWidth / 3) - 5.0f, balloonTop + balloonHeight + 100, stringPaint);
+    }
+
     /**
      * onDraw is like "paint" in a regular Java program.  While a Canvas is
      * conceptually similar to a Graphics in javax.swing, the implementation has
@@ -152,6 +171,14 @@ public class CakeView extends SurfaceView {
         if(this.cake_model.drawCheck == true){
             drawCheckerBoard(canvas, this.cake_model.xCoord, this.cake_model.yCoord);
         }
+
+        // Draws the balloon in the touch location every time
+        if (balloonLeft != 0.0f && balloonTop != 0.0f) {
+            drawBalloon(canvas);
+        }
+
+        //prints the coordinates of the user taps in the bottom right corner
+        canvas.drawText("(" + cake_model.xCoord + "," + cake_model.yCoord + ")", cakeWidth + 400f, cakeTop + 320f, textPaint);
 
     }//onDraw
 

@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
         CakeController newCakeController = new CakeController(newCakeView);
 
+        // Set the On Touch Listener
+        newCakeView.setOnTouchListener(newCakeController);
+
         Button blowOut = (Button) findViewById(R.id.blowOutButton);
         blowOut.setOnClickListener(newCakeController);
 
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         SeekBar numCandlesSeek = (SeekBar) findViewById(R.id.seekBar);
         numCandlesSeek.setOnSeekBarChangeListener(newCakeController);
 
+        //implementing the onTouch command
         newCakeView.setOnTouchListener(newCakeController);
 
     }
