@@ -58,20 +58,15 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
         cakeModel.yCoord = (int) motionEvent.getY();
         cakeView.invalidate();
         Log.i("touched","yes");
-        return true;
-    }
 
-
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
         //get coords of tap
-        float x = event.getX();
-        float y = event.getY();
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
         Log.d("tap", "tap registered at: (" + x + ", " + y + ")");
 
         //draw checkerboard at coords
-        this.cakeModel.xCoord = x;
-        this.cakeModel.yCoord = y;
+        this.cakeModel.xCoord = (int)x;
+        this.cakeModel.yCoord = (int) y;
         this.cakeModel.drawCheck = true;
         cakeView.invalidate();
         return false;
